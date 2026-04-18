@@ -134,7 +134,7 @@ GameObject:
   - component: {fileID: 684090224}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -225,13 +225,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27f06d1a7cd40e249999c8d5fead152a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
-  runMaxSpeed: 10
+  runMaxSpeed: 100
   runAcceleration: 2
   runAccelAmount: 0
   runDecceleration: 2
   runDeccelAmount: 0
-  accelInAir: 0.2
-  deccelInAir: 0.168
+  accelInAir: 1
+  deccelInAir: 1
   doConserveMomentum: 1
   _groundCheckPoint: {fileID: 684090222}
   _groundCheckSize: {x: 0.49, y: 0.03}
@@ -299,7 +299,7 @@ Rigidbody2D:
   m_Mass: 10
   m_LinearDamping: 0
   m_AngularDamping: 0.05
-  m_GravityScale: 10
+  m_GravityScale: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2

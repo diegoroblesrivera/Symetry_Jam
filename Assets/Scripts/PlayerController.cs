@@ -15,10 +15,6 @@ public class PlayerController : MonoBehaviour
 	public bool doConserveMomentum;
     public Rigidbody2D rb2d { get; private set; }
 
-    float movementSpeed = 25f;
-    float jumpSpeed = 8f;
-    float gravity = 9.8f;
-
     #region COMPONENTS
     public Rigidbody2D RB { get; private set; }
 	//Script to handle all player animations, all references can be safely removed if you're importing into your own project.
@@ -61,6 +57,18 @@ public class PlayerController : MonoBehaviour
         moveAction = InputSystem.actions.FindAction("Move");
         rb2d = GetComponent<Rigidbody2D>();
     }
+
+	private void OnValidate()
+    {
+		//Calculate are run acceleration & deceleration forces using formula: amount = ((1 / Time.fixedDeltaTime) * acceleration) / runMaxSpeed
+		runAccelAmount = (50 * runAcceleration) / runMaxSpeed;
+		runDeccelAmount = (50 * runDecceleration) / runMaxSpeed;
+
+		#region Variable Ranges
+		runAcceleration = Mathf.Clamp(runAcceleration, 0.01f, runMaxSpeed);
+		runDecceleration = Mathf.Clamp(runDecceleration, 0.01f, runMaxSpeed);
+		#endregion
+	}
 
     void OnEnable()
     {
@@ -114,37 +122,28 @@ public class PlayerController : MonoBehaviour
 		else
 			accelRate = (Mathf.Abs(targetSpeed) > 0.01f) ? runAccelAmount * accelInAir : runDeccelAmount * deccelInAir;
 		#endregion
+		print(runAccelAmount);
 
 		//Not used since no jump implemented here, but may be useful if you plan to implement your own
-		/* 
-		#region Add Bonus Jump Apex Acceleration
-		//Increase are acceleration and maxSpeed when at the apex of their jump, makes the jump feel a bit more bouncy, responsive and natural
-		if ((IsJumping || IsWallJumping || _isJumpFalling) && Mathf.Abs(RB.velocity.y) < jumpHangTimeThreshold)
-		{
-			accelRate *= jumpHangAccelerationMult;
-			targetSpeed *= jumpHangMaxSpeedMult;
-		}
-		#endregion
-		*/
 
-		#region Conserve Momentum
-		//We won't slow the player down if they are moving in their desired direction but at a greater speed than their maxSpeed doConserveMomentum && 
-		if(Mathf.Abs(rb2d.linearVelocity.x) > Mathf.Abs(targetSpeed) && Mathf.Sign(rb2d.linearVelocity.x) == Mathf.Sign(targetSpeed) && Mathf.Abs(targetSpeed) > 0.01f && LastOnGroundTime < 0)
-		{
-			//Prevent any deceleration from happening, or in other words conserve are current momentum
-			//You could experiment with allowing for the player to slightly increae their speed whilst in this "state"
-			accelRate = 0; 
-		}
-		#endregion
+		// #region Add Bonus Jump Apex Acceleration
+		// //Increase are acceleration and maxSpeed when at the apex of their jump, makes the jump feel a bit more bouncy, responsive and natural
+		// if ((IsJumping || IsWallJumping || _isJumpFalling) && Mathf.Abs(RB.velocity.y) < jumpHangTimeThreshold)
+		// {
+		// 	accelRate *= jumpHangAccelerationMult;
+		// 	targetSpeed *= jumpHangMaxSpeedMult;
+		// }
+		// #endregion
 
 		//Calculate difference between current linearVelocity and desired linearVelocity
-		float speedDif = targetSpeed - rb2d.linearVelocity.x;
+		float speedDif = targetSpeed - rb2d.linearVelocityX;
 		//Calculate force along x-axis to apply to thr player
 
 		float movement = speedDif * accelRate;
-
+        
 		//Convert this to a vector and apply to rigidbody
-		rb2d.AddForce(movement * Vector2.right, ForceMode2D.Force);
+		// rb2d.AddForce( Vector2.right, ForceMode2D.Force);
+		rb2d.AddForceX(movement, ForceMode2D.Force);
     }
 	private void Turn()
 	{
