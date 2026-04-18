@@ -109,3 +109,10 @@ il2cppOutput/
 *.bak
 *.swp
 *.orig
+
+git config --global user.name "Su Nombre"
+git config --global user.email "correo@email.com"
+
+git add .
+git commit -m "cambios"
+git push

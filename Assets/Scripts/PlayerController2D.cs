@@ -9,13 +9,14 @@ public class PlayerController2D : MonoBehaviour
     public float gravityForce = 35.0f; // Tu gravedad manual
     private float jumpVelocity; // Se calculará sola
 
+
     [Header("Components")]
     public Rigidbody2D rb;
     public SpriteRenderer spriteRenderer;
     public Animator animator;
     public Transform groundCheck;
     public LayerMask groundLayer;
-
+    public bool isJumpPressed;
     private Vector2 moveInput;
     private bool isGrounded;
 
