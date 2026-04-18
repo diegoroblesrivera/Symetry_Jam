@@ -60,7 +60,7 @@ public class PlayerController2D : MonoBehaviour
     {
         moveInput = context.ReadValue<Vector2>();
     }
-
+    private bool isJumpPressed = false; // Para detectar el estado del botón de salto
     public void OnJump(InputAction.CallbackContext context)
     {
         // Detectamos si el botón está presionado o soltado
