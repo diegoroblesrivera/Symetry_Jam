@@ -406,7 +406,6 @@ public class PlayerController : MonoBehaviour
         if (!puedeColocarBloques || bloquesRestantes <= 0)
             return;
 
-        // Buscar el objeto Plataformas_Dinamicas en la escena
         GameObject plataformasDinamicas = GameObject.Find("Plataformas_Dinamicas");
         if (plataformasDinamicas == null)
         {
@@ -414,21 +413,26 @@ public class PlayerController : MonoBehaviour
             return;
         }
 
+        float direccion = spriteRenderer.flipX ? 1 : -1;
         Vector3 posicion = transform.position + Vector3.down * 0.6f;
-
-        // Spawn original
-        Instantiate(plataformaPrefab, posicion, Quaternion.identity, plataformasDinamicas.transform);
-
-        // Calcular espejo
         float xEspejo = 2 * centroX - posicion.x;
         Vector3 posicionEspejo = new Vector3(xEspejo, posicion.y, posicion.z);
 
-        // Spawn espejo
-        Instantiate(plataformaPrefab, posicionEspejo, Quaternion.identity, plataformasDinamicas.transform);
+        GameObject bloque = Instantiate(plataformaPrefab, posicion, Quaternion.identity, plataformasDinamicas.transform);
+        GameObject bloqueEspejo = Instantiate(plataformaPrefab, posicionEspejo, Quaternion.identity, plataformasDinamicas.transform);
+        CambiarColorABlanco(bloqueEspejo);
 
         bloquesRestantes--;
+        ActualizarTransparencia();
     }
 
+    private void CambiarColorABlanco(GameObject bloque)
+    {
+        var sr = bloque.GetComponent<SpriteRenderer>();
+        if (sr != null)
+            sr.color = Color.white;
+    }
+	
     public void SpawnVisualBurst()
     {
         Instantiate(visualBurstPrefab, transform.position, Quaternion.identity, null);

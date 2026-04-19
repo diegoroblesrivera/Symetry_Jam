@@ -267,7 +267,7 @@ MonoBehaviour:
   centroX: 0
   visualBurstPrefab: {fileID: 1162542154237701369, guid: f36fc244545f8d3418b5fd77227971fe, type: 3}
   _groundCheckPoint: {fileID: 1701688963842914747}
-  _groundCheckSize: {x: 0.49, y: 0.03}
+  _groundCheckSize: {x: 0.45, y: 0.03}
   _groundLayer:
     serializedVersion: 2
     m_Bits: 64
