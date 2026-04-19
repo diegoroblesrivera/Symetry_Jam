@@ -3,16 +3,16 @@
   "WorkspaceRootPath": "C:\\Users\\AlonsoQ\\Documents\\Unity\\Symetry_Jam\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{DAF19EA5-7D2E-3FCD-9310-8D4B957106AA}|Assembly-CSharp.csproj|c:\\users\\alonsoq\\documents\\unity\\symetry_jam\\assets\\scripts\\deadtrigger.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DAF19EA5-7D2E-3FCD-9310-8D4B957106AA}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\deadtrigger.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{DAF19EA5-7D2E-3FCD-9310-8D4B957106AA}|Assembly-CSharp.csproj|c:\\users\\alonsoq\\documents\\unity\\symetry_jam\\assets\\scripts\\bloqueitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{DAF19EA5-7D2E-3FCD-9310-8D4B957106AA}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\bloqueitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{DAF19EA5-7D2E-3FCD-9310-8D4B957106AA}|Assembly-CSharp.csproj|c:\\users\\alonsoq\\documents\\unity\\symetry_jam\\assets\\scripts\\middleline.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{DAF19EA5-7D2E-3FCD-9310-8D4B957106AA}|Assembly-CSharp.csproj|C:\\Users\\AlonsoQ\\Documents\\Unity\\Symetry_Jam\\assets\\scripts\\middleline.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{DAF19EA5-7D2E-3FCD-9310-8D4B957106AA}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\middleline.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{DAF19EA5-7D2E-3FCD-9310-8D4B957106AA}|Assembly-CSharp.csproj|C:\\Users\\AlonsoQ\\Documents\\Unity\\Symetry_Jam\\assets\\scripts\\playercontroller2d.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{DAF19EA5-7D2E-3FCD-9310-8D4B957106AA}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\playercontroller2d.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{DAF19EA5-7D2E-3FCD-9310-8D4B957106AA}|Assembly-CSharp.csproj|C:\\Users\\AlonsoQ\\Documents\\Unity\\Symetry_Jam\\assets\\scripts\\finishline.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -21,6 +21,10 @@
     {
       "AbsoluteMoniker": "D:0:0:{DAF19EA5-7D2E-3FCD-9310-8D4B957106AA}|Assembly-CSharp.csproj|C:\\Users\\AlonsoQ\\Documents\\Unity\\Symetry_Jam\\assets\\scripts\\scenemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{DAF19EA5-7D2E-3FCD-9310-8D4B957106AA}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\scenemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DAF19EA5-7D2E-3FCD-9310-8D4B957106AA}|Assembly-CSharp.csproj|C:\\Users\\AlonsoQ\\Documents\\Unity\\Symetry_Jam\\assets\\scripts\\playercontroller2d.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DAF19EA5-7D2E-3FCD-9310-8D4B957106AA}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\playercontroller2d.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -39,28 +43,44 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "BloqueItem.cs",
-              "DocumentMoniker": "C:\\Users\\AlonsoQ\\Documents\\Unity\\Symetry_Jam\\Assets\\Scripts\\BloqueItem.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\BloqueItem.cs",
-              "ToolTip": "C:\\Users\\AlonsoQ\\Documents\\Unity\\Symetry_Jam\\Assets\\Scripts\\BloqueItem.cs",
-              "RelativeToolTip": "Assets\\Scripts\\BloqueItem.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAABAAAAAAAAAA==",
+              "Title": "DeadTrigger.cs",
+              "DocumentMoniker": "C:\\Users\\AlonsoQ\\Documents\\Unity\\Symetry_Jam\\Assets\\Scripts\\DeadTrigger.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\DeadTrigger.cs",
+              "ToolTip": "C:\\Users\\AlonsoQ\\Documents\\Unity\\Symetry_Jam\\Assets\\Scripts\\DeadTrigger.cs",
+              "RelativeToolTip": "Assets\\Scripts\\DeadTrigger.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-19T07:37:24.19Z",
+              "WhenOpened": "2026-04-19T17:52:07.513Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
+              "Title": "BloqueItem.cs",
+              "DocumentMoniker": "C:\\Users\\AlonsoQ\\Documents\\Unity\\Symetry_Jam\\Assets\\Scripts\\BloqueItem.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\BloqueItem.cs",
+              "ToolTip": "C:\\Users\\AlonsoQ\\Documents\\Unity\\Symetry_Jam\\Assets\\Scripts\\BloqueItem.cs",
+              "RelativeToolTip": "Assets\\Scripts\\BloqueItem.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-19T07:37:24.19Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
               "Title": "MiddleLine.cs",
               "DocumentMoniker": "C:\\Users\\AlonsoQ\\Documents\\Unity\\Symetry_Jam\\Assets\\Scripts\\MiddleLine.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\MiddleLine.cs",
               "ToolTip": "C:\\Users\\AlonsoQ\\Documents\\Unity\\Symetry_Jam\\Assets\\Scripts\\MiddleLine.cs",
               "RelativeToolTip": "Assets\\Scripts\\MiddleLine.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAhAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-19T06:21:34.064Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-04-19T06:21:34.064Z"
             },
             {
               "$type": "Document",
@@ -88,13 +108,13 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 5,
               "Title": "PlayerController2D.cs",
               "DocumentMoniker": "C:\\Users\\AlonsoQ\\Documents\\Unity\\Symetry_Jam\\Assets\\Scripts\\PlayerController2D.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\PlayerController2D.cs",
               "ToolTip": "C:\\Users\\AlonsoQ\\Documents\\Unity\\Symetry_Jam\\Assets\\Scripts\\PlayerController2D.cs",
               "RelativeToolTip": "Assets\\Scripts\\PlayerController2D.cs",
-              "ViewState": "AgIAAJAAAAAAAAAAAAAowL0AAAABAAAAAAAAAA==",
+              "ViewState": "AgIAAJMAAAAAAAAAAAAowLQAAAAbAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-04-18T17:49:27.014Z"
             }

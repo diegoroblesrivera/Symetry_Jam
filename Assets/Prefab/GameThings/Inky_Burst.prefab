@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2056361844013130443}
   m_Layer: 7
-  m_Name: Burst
+  m_Name: Inky_Burst
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

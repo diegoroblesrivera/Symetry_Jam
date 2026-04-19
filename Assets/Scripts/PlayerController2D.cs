@@ -173,11 +173,12 @@ public class PlayerController2D : MonoBehaviour
 
     public void SpawnVisualBurst()
     {
-        Instantiate(visualBurstPrefab, transform.position, Quaternion.identity);
+        Instantiate(visualBurstPrefab, transform.position, Quaternion.identity, null);
         Destroy(visualBurstPrefab,5f);
     }
     public void OnResetStage()
     {
+        SpawnVisualBurst();
         StartCoroutine(DelayedReset());
     }
 
