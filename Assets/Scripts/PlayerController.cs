@@ -46,6 +46,12 @@ public class PlayerController : MonoBehaviour
     public Rigidbody2D rb2d { get; private set; }
     public SpriteRenderer spriteRenderer { get; private set; }
     public Animator animator { get; private set; }
+    [Header("Animators")]
+    public RuntimeAnimatorController animatorControllerNormal;
+    public RuntimeAnimatorController animatorControllerBloqueado;
+    [Header("Audio")]
+    public AudioSource audioSource;
+    public AudioClip resetClip; 
 
 	#endregion
     [Header("Assists")]
@@ -103,6 +109,7 @@ public class PlayerController : MonoBehaviour
     private InputAction moveAction;
 	private InputAction jumpAction;
 	private InputAction spawnAction;
+	private InputAction resetStageAction;
 
     void Start()
     {
@@ -113,14 +120,11 @@ public class PlayerController : MonoBehaviour
 
     void Awake()
     {
-        // Busca la acción "Move" dentro del InputSystem_Actions
-        moveAction = InputSystem.actions.FindAction("Move");
-		jumpAction = InputSystem.actions.FindAction("Jump");
-		spawnAction = InputSystem.actions.FindAction("Spawn");
-		
+		InputManagement();
         rb2d = GetComponent<Rigidbody2D>();
 		spriteRenderer = GetComponent<SpriteRenderer>();
 		animator = GetComponent<Animator>();
+		
     }
 
 	private void OnValidate()
@@ -143,19 +147,14 @@ public class PlayerController : MonoBehaviour
 		#endregion
 	}
 
-    void OnEnable()
-    {
-        moveAction.Enable();
-        jumpAction.Enable();
-        spawnAction.Enable();
-    }
-
-    void OnDisable()
-    {
-        moveAction.Disable();
-        jumpAction.Disable();
-        spawnAction.Disable();
-    }
+	private void InputManagement()
+	{
+		// Busca la acción "Move" dentro del InputSystem_Actions
+        moveAction = InputSystem.actions.FindAction("Move");
+		jumpAction = InputSystem.actions.FindAction("Jump");
+		spawnAction = InputSystem.actions.FindAction("Spawn");
+		resetStageAction = InputSystem.actions.FindAction("RestartLevel");
+	}
 
     // Update is called once per frame
     void Update()
@@ -185,6 +184,10 @@ public class PlayerController : MonoBehaviour
 		if (spawnAction.WasPerformedThisFrame())
 		{
         	SpawnPlataforma();
+		}
+		if (resetStageAction.WasPerformedThisFrame())
+		{
+        	ResetStage();
 		}
 
 		#region COLLISION CHECKS
@@ -392,12 +395,20 @@ public class PlayerController : MonoBehaviour
     {
         maxBloques += cantidad;
         bloquesRestantes += cantidad;
+
+        ActualizarTransparencia();
     }
 
     // Llama este método desde MiddleLine para bloquear la colocación
     public void BloquearColocacionBloques()
     {
         puedeColocarBloques = false;
+        if (animator != null && animatorControllerBloqueado != null)
+        {
+            animator.runtimeAnimatorController = animatorControllerBloqueado;
+        }
+        bloquesRestantes = 3; // Resetea los bloques restantes al límite inicial
+        ActualizarTransparencia();
     }
 
     // Modifica SpawnPlataforma para respetar el límite y el bloqueo
@@ -438,7 +449,7 @@ public class PlayerController : MonoBehaviour
         Instantiate(visualBurstPrefab, transform.position, Quaternion.identity, null);
         Destroy(visualBurstPrefab,5f);
     }
-    public void OnResetStage()
+    public void ResetStage()
     {
         SpawnVisualBurst();
         StartCoroutine(DelayedReset());
@@ -448,5 +459,25 @@ public class PlayerController : MonoBehaviour
     {
         yield return null; // Espera un frame
         LevelManager.Instance.RestartCurrentLevel();
+    }
+
+    private void ActualizarTransparencia()
+    {
+        float alpha = 1f;
+        if (bloquesRestantes >= 3)
+            alpha = 1f;
+        else if (bloquesRestantes == 2)
+            alpha = 0.90f;
+        else if (bloquesRestantes == 1)
+            alpha = 0.80f;
+        else if (bloquesRestantes == 0)
+            alpha = 0.40f;
+
+        if (spriteRenderer != null)
+        {
+            Color c = spriteRenderer.color;
+            c.a = alpha;
+            spriteRenderer.color = c;
+        }
     }
 }
