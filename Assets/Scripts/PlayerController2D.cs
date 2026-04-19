@@ -3,41 +3,33 @@ using UnityEngine.InputSystem;
 
 public class PlayerController2D : MonoBehaviour
 {
-    [Header("Settings")]
-    public float speed = 7.0f;
-    public float blocksToJump = 3.0f;
-    public float gravityForce = 35.0f;
-    private float jumpVelocity;
+    [Header("Movement")]
+    public float speed = 7f;
+    public float jumpForce = 12f;
+    public float fastFallMultiplier = 2f;
+
+    [Header("Ground Check")]
+    public Transform groundCheck;
+    public float groundRadius = 0.25f;
+    public LayerMask groundLayer;
 
     [Header("Components")]
     public Rigidbody2D rb;
     public SpriteRenderer spriteRenderer;
     public Animator animator;
-    public Transform groundCheck;
-    public LayerMask groundLayer;
 
     [Header("Spawn")]
     public GameObject plataformaPrefab;
     public float distanciaSpawn = 3f;
     public float centroX = 0f;
 
-    public bool isJumpPressed;
     private Vector2 moveInput;
+    private bool jumpPressed;
     private bool isGrounded;
-
-    void Start()
-    {
-        jumpVelocity = Mathf.Sqrt(2 * gravityForce * blocksToJump);
-    }
 
     void Update()
     {
-        isGrounded = Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayer);
-
-        if (!isGrounded && moveInput.y < -0.5f)
-        {
-            rb.linearVelocity += Vector2.down * 50f * Time.deltaTime;
-        }
+        CheckGround();
 
         HandleAnimations();
         FlipSprite();
@@ -45,38 +37,75 @@ public class PlayerController2D : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (!isGrounded)
+        Move();
+        Jump();
+        BetterFall();
+    }
+
+    void CheckGround()
+    {
+        isGrounded = Physics2D.OverlapCircle(
+            groundCheck.position,
+            groundRadius,
+            groundLayer
+        );
+    }
+
+    void Move()
+    {
+        rb.linearVelocity = new Vector2(moveInput.x * speed, rb.linearVelocity.y);
+    }
+
+    void Jump()
+    {
+        if (jumpPressed && isGrounded)
         {
-            rb.linearVelocity += Vector2.down * gravityForce * Time.fixedDeltaTime;
-        }
-        else if (rb.linearVelocity.y < 0)
-        {
-            rb.linearVelocity = new Vector2(rb.linearVelocity.x, -0.1f);
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
         }
 
-        rb.linearVelocity = new Vector2(moveInput.x * speed, rb.linearVelocity.y);
+        jumpPressed = false;
+    }
+
+    void BetterFall()
+    {
+        if (rb.linearVelocity.y < 0)
+        {
+            rb.linearVelocity += Vector2.up *
+                Physics2D.gravity.y *
+                (fastFallMultiplier - 1) *
+                Time.fixedDeltaTime;
+        }
     }
 
     public void OnMove(InputAction.CallbackContext context)
     {
         moveInput = context.ReadValue<Vector2>();
     }
-    private bool isJumpPressed = false; // Para detectar el estado del botón de salto
+
     public void OnJump(InputAction.CallbackContext context)
     {
-        if (context.started) isJumpPressed = true;
-        if (context.canceled) isJumpPressed = false;
-
-        if (context.started && isGrounded)
-        {
-            if (moveInput.y < -0.5f)
-                rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpVelocity * 0.6f);
-            else
-                rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpVelocity);
-        }
+        if (context.started)
+            jumpPressed = true;
     }
 
-    // 🔥 NUEVO INPUT PARA SPAWN
+    void FlipSprite()
+    {
+        if (moveInput.x > 0.1f)
+            spriteRenderer.flipX = true;
+        else if (moveInput.x < -0.1f)
+            spriteRenderer.flipX = false;
+    }
+
+    void HandleAnimations()
+    {
+        animator.SetFloat("Speed", Mathf.Abs(moveInput.x));
+        animator.SetBool("Grounded", isGrounded);
+        animator.SetBool("Crouch", moveInput.y < -0.5f && isGrounded);
+        animator.SetBool("FastFall", !isGrounded && moveInput.y < -0.5f);
+        animator.SetFloat("YVelocity", rb.linearVelocity.y);
+
+    }
+
     public void OnSpawn(InputAction.CallbackContext context)
     {
         if (!context.performed) return;
@@ -89,7 +118,7 @@ public class PlayerController2D : MonoBehaviour
         // Dirección según hacia dónde mira el personaje
         float direccion = spriteRenderer.flipX ? 1 : -1;
 
-        Vector3 posicion = transform.position + new Vector3(direccion * distanciaSpawn, 0, 0);
+        Vector3 posicion = transform.position + Vector3.down * 0.6f;
 
         // Spawn original
         Instantiate(plataformaPrefab, posicion, Quaternion.identity);
@@ -102,30 +131,4 @@ public class PlayerController2D : MonoBehaviour
         Instantiate(plataformaPrefab, posicionEspejo, Quaternion.identity);
     }
 
-    void HandleAnimations()
-    {
-        bool isMovingDown = moveInput.y < -0.5f;
-        bool isMovingUp = moveInput.y > 0.5f;
-
-        if (isGrounded)
-        {
-            if (Mathf.Abs(moveInput.x) < 0.1f)
-                animator.Play(isMovingDown ? "crawl" : "idle");
-            else
-                animator.Play("run");
-        }
-        else
-        {
-            if (rb.linearVelocity.y > -2f)
-                animator.Play(isMovingDown ? "crawl" : "jump");
-            else
-                animator.Play(isMovingUp ? "jump" : "crawl");
-        }
-    }
-
-    void FlipSprite()
-    {
-        if (moveInput.x > 0) spriteRenderer.flipX = true;
-        else if (moveInput.x < 0) spriteRenderer.flipX = false;
-    }
 }

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5583307308588892431}
   - component: {fileID: 4874670722997527768}
   - component: {fileID: 1984197575970775977}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SBlock
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 393175715963067602}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -13.188035, y: -7.46208, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
