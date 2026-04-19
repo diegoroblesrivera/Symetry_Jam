@@ -23,9 +23,22 @@ public class PlayerController2D : MonoBehaviour
     public float distanciaSpawn = 3f;
     public float centroX = 0f;
 
+    [Header("VisualBurst")]
+    public GameObject visualBurstPrefab;
+
+    [Header("Bloques")]
+    public int maxBloques = 3; // Límite inicial de bloques
+
     private Vector2 moveInput;
     private bool jumpPressed;
     private bool isGrounded;
+    private int bloquesRestantes;
+    private bool puedeColocarBloques = true;
+
+    void Start()
+    {
+        bloquesRestantes = maxBloques;
+    }
 
     void Update()
     {
@@ -113,22 +126,65 @@ public class PlayerController2D : MonoBehaviour
         SpawnPlataforma();
     }
 
+    // Llama este método para aumentar el límite desde un item
+    public void AumentarLimiteBloques(int cantidad)
+    {
+        maxBloques += cantidad;
+        bloquesRestantes += cantidad;
+    }
+
+    // Llama este método desde MiddleLine para bloquear la colocación
+    public void BloquearColocacionBloques()
+    {
+        puedeColocarBloques = false;
+    }
+
+    // Modifica SpawnPlataforma para respetar el límite y el bloqueo
     void SpawnPlataforma()
     {
+        if (!puedeColocarBloques || bloquesRestantes <= 0)
+            return;
+
+        // Buscar el objeto Plataformas_Dinamicas en la escena
+        GameObject plataformasDinamicas = GameObject.Find("Plataformas_Dinamicas");
+        if (plataformasDinamicas == null)
+        {
+            Debug.LogWarning("No se encontró el objeto Plataformas_Dinamicas en la escena.");
+            return;
+        }
+
         // Dirección según hacia dónde mira el personaje
         float direccion = spriteRenderer.flipX ? 1 : -1;
 
         Vector3 posicion = transform.position + Vector3.down * 0.6f;
 
         // Spawn original
-        Instantiate(plataformaPrefab, posicion, Quaternion.identity);
+        Instantiate(plataformaPrefab, posicion, Quaternion.identity, plataformasDinamicas.transform);
 
         // Calcular espejo
         float xEspejo = 2 * centroX - posicion.x;
         Vector3 posicionEspejo = new Vector3(xEspejo, posicion.y, posicion.z);
 
         // Spawn espejo
-        Instantiate(plataformaPrefab, posicionEspejo, Quaternion.identity);
+        Instantiate(plataformaPrefab, posicionEspejo, Quaternion.identity, plataformasDinamicas.transform);
+
+        bloquesRestantes--;
+    }
+
+    public void SpawnVisualBurst()
+    {
+        Instantiate(visualBurstPrefab, transform.position, Quaternion.identity);
+        Destroy(visualBurstPrefab,5f);
+    }
+    public void OnResetStage()
+    {
+        StartCoroutine(DelayedReset());
+    }
+
+    private System.Collections.IEnumerator DelayedReset()
+    {
+        yield return null; // Espera un frame
+        LevelManager.Instance.RestartCurrentLevel();
     }
 
 }
