@@ -8,7 +8,7 @@ public class BloqueItem : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            var player = collision.GetComponent<PlayerController2D>();
+            var player = collision.GetComponent<PlayerController>();
             player.AumentarLimiteBloques(cantidadExtra);
             Destroy(gameObject);
         }
