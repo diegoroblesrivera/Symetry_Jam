@@ -36,11 +36,15 @@ public class PlayerController2D : MonoBehaviour
     public AudioSource audioSource;
     public AudioClip resetClip; 
 
+    [Header("Coyote Time")]
+    public float coyoteTime = 0.15f; // Duración del coyote time en segundos
+
     private Vector2 moveInput;
     private bool jumpPressed;
     private bool isGrounded;
     private int bloquesRestantes;
     private bool puedeColocarBloques = true;
+    private float coyoteTimeCounter;
 
     void Start()
     {
@@ -69,6 +73,11 @@ public class PlayerController2D : MonoBehaviour
             groundRadius,
             groundLayer
         );
+
+        if (isGrounded)
+            coyoteTimeCounter = coyoteTime;
+        else
+            coyoteTimeCounter -= Time.deltaTime;
     }
 
     void Move()
@@ -78,9 +87,10 @@ public class PlayerController2D : MonoBehaviour
 
     void Jump()
     {
-        if (jumpPressed && isGrounded)
+        if (jumpPressed && coyoteTimeCounter > 0f)
         {
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
+            coyoteTimeCounter = 0f; // Evita saltos dobles durante el coyote time
         }
 
         jumpPressed = false;
@@ -138,6 +148,8 @@ public class PlayerController2D : MonoBehaviour
     {
         maxBloques += cantidad;
         bloquesRestantes += cantidad;
+
+        ActualizarTransparencia();
     }
 
     // Llama este método desde MiddleLine para bloquear la colocación
@@ -148,6 +160,8 @@ public class PlayerController2D : MonoBehaviour
         {
             animator.runtimeAnimatorController = animatorControllerBloqueado;
         }
+        bloquesRestantes = 3; // Resetea los bloques restantes al límite inicial
+        ActualizarTransparencia();
     }
 
     // Modifica SpawnPlataforma para respetar el límite y el bloqueo
@@ -168,14 +182,12 @@ public class PlayerController2D : MonoBehaviour
         float xEspejo = 2 * centroX - posicion.x;
         Vector3 posicionEspejo = new Vector3(xEspejo, posicion.y, posicion.z);
 
-        // Instancia el bloque debajo del jugador (normal)
         GameObject bloque = Instantiate(plataformaPrefab, posicion, Quaternion.identity, plataformasDinamicas.transform);
-
-        // Instancia el bloque espejado (blanco)
         GameObject bloqueEspejo = Instantiate(plataformaPrefab, posicionEspejo, Quaternion.identity, plataformasDinamicas.transform);
         CambiarColorABlanco(bloqueEspejo);
 
         bloquesRestantes--;
+        ActualizarTransparencia();
     }
 
     // Método auxiliar para cambiar el color a blanco
@@ -204,4 +216,23 @@ public class PlayerController2D : MonoBehaviour
         LevelManager.Instance.RestartCurrentLevel();
     }
 
+    private void ActualizarTransparencia()
+    {
+        float alpha = 1f;
+        if (bloquesRestantes >= 3)
+            alpha = 1f;
+        else if (bloquesRestantes == 2)
+            alpha = 0.90f;
+        else if (bloquesRestantes == 1)
+            alpha = 0.80f;
+        else if (bloquesRestantes == 0)
+            alpha = 0.40f;
+
+        if (spriteRenderer != null)
+        {
+            Color c = spriteRenderer.color;
+            c.a = alpha;
+            spriteRenderer.color = c;
+        }
+    }
 }
