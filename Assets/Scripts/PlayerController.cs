@@ -122,8 +122,6 @@ public class PlayerController : MonoBehaviour
 		gravityStrength = -(2 * jumpHeight) / (jumpTimeToApex * jumpTimeToApex);
 		//Calculate the rigidbody's gravity scale (ie: gravity strength relative to unity's gravity value, see project settings/Physics2D)
 		gravityScale = gravityStrength / Physics2D.gravity.y;
-		print(gravityStrength);
-		print(Physics2D.gravity.y);
 
 		//Calculate are run acceleration & deceleration forces using formula: amount = ((1 / Time.fixedDeltaTime) * acceleration) / runMaxSpeed
 		runAccelAmount = (50 * runAcceleration) / runMaxSpeed;
