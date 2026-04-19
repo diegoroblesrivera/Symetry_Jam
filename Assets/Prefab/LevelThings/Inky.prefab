@@ -242,8 +242,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27f06d1a7cd40e249999c8d5fead152a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
-  gravityStrength: -39.506176
-  gravityScale: 4.027133
+  gravityStrength: -37.5
+  gravityScale: 3.8226297
   fallGravityMult: 3
   maxFallSpeed: 25
   fastFallGravityMult: 3
@@ -256,14 +256,18 @@ MonoBehaviour:
   accelInAir: 0.75
   deccelInAir: 0.75
   doConserveMomentum: 1
-  jumpHeight: 4
-  jumpTimeToApex: 0.45
-  jumpForce: 17.777779
+  jumpHeight: 3
+  jumpTimeToApex: 0.4
+  jumpForce: 15
   jumpCutGravityMult: 2
-  jumpHangGravityMult: 0.25
-  jumpHangTimeThreshold: 0.1
+  jumpHangGravityMult: 1
+  jumpHangTimeThreshold: 0.05
   jumpHangAccelerationMult: 1
   jumpHangMaxSpeedMult: 1
+  animatorControllerNormal: {fileID: 0}
+  animatorControllerBloqueado: {fileID: 0}
+  audioSource: {fileID: 0}
+  resetClip: {fileID: 0}
   coyoteTime: 0.1
   jumpInputBufferTime: 0.1
   maxBloques: 3
