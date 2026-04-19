@@ -5,12 +5,12 @@ public class MiddleLine : MonoBehaviour
     public GameObject ContinueLevelSpawnPoint; // Referencia al siguiente trigger de nivel
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        // Verificamos que sea el jugador quien colisionó
+        // Verificamos que sea el jugador quien colisionï¿½
         if (collision.CompareTag("Player"))
         {
-            var player = collision.GetComponent<PlayerController2D>();
+            var player = collision.GetComponent<PlayerController>();
             player.SpawnVisualBurst();
-            player.BloquearColocacionBloques(); // Bloquea la colocación de bloques
+            player.BloquearColocacionBloques(); // Bloquea la colocaciï¿½n de bloques
 
             collision.transform.position = ContinueLevelSpawnPoint.transform.position; // Teletransportamos al jugador al siguiente trigger
             if (collision.TryGetComponent<Rigidbody2D>(out Rigidbody2D rb))

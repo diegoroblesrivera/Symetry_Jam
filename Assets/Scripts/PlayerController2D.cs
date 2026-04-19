@@ -32,6 +32,9 @@ public class PlayerController2D : MonoBehaviour
     [Header("Animators")]
     public RuntimeAnimatorController animatorControllerNormal;
     public RuntimeAnimatorController animatorControllerBloqueado;
+    [Header("Audio")]
+    public AudioSource audioSource;
+    public AudioClip resetClip; 
 
     [Header("Coyote Time")]
     public float coyoteTime = 0.15f; // Duración del coyote time en segundos
@@ -204,6 +207,7 @@ public class PlayerController2D : MonoBehaviour
     {
         SpawnVisualBurst();
         StartCoroutine(DelayedReset());
+
     }
 
     private System.Collections.IEnumerator DelayedReset()

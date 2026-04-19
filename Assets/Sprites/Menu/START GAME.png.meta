@@ -1,10 +1,34 @@
 fileFormatVersion: 2
-guid: 5c0869934190d1644842cd1f9d8e322d
+guid: ba8c6dd8fc8787e49bda6a464823a5e0
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -3890980514325383558
-    second: Inky_run_0
+      213: 2635582669524548162
+    second: START GAME_0
+  - first:
+      213: 5873908869559527254
+    second: START GAME_1
+  - first:
+      213: -2249823206569279560
+    second: START GAME_2
+  - first:
+      213: 1794808745067755338
+    second: START GAME_3
+  - first:
+      213: 7559230806225823421
+    second: START GAME_4
+  - first:
+      213: -1349311823252716393
+    second: START GAME_5
+  - first:
+      213: 5319863383050194753
+    second: START GAME_6
+  - first:
+      213: 168571256073911149
+    second: START GAME_7
+  - first:
+      213: -3372586851125673513
+    second: START GAME_8
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -46,12 +70,12 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 16
+  spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -97,33 +121,7 @@ TextureImporter:
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 4
-    buildTarget: Android
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 4
     buildTarget: WebGL
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 4
-    buildTarget: WindowsStoreApps
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
@@ -139,221 +137,199 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Inky_run_0
+      name: START GAME_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 16
-        height: 16
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        x: 24
+        y: 41
+        width: 38
+        height: 35
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: a763ba766d5700ac0800000000000000
-      internalID: -3890980514325383558
+      spriteID: 24abf295978739420800000000000000
+      internalID: 2635582669524548162
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Inky_run_1
+      name: START GAME_1
       rect:
         serializedVersion: 2
-        x: 16
-        y: 0
-        width: 16
-        height: 16
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        x: 63
+        y: 41
+        width: 35
+        height: 35
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: be871620ad7c9aa4e8950160b68932ed
-      internalID: -192849960
+      spriteID: 657ac1ddef0548150800000000000000
+      internalID: 5873908869559527254
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Inky_run_2
+      name: START GAME_2
       rect:
         serializedVersion: 2
-        x: 32
-        y: 0
-        width: 16
-        height: 16
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        x: 99
+        y: 41
+        width: 38
+        height: 35
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: 1f99168b88d9ec94085247f495f3da6c
-      internalID: 1835066660
+      spriteID: 8bff105b6b507c0e0800000000000000
+      internalID: -2249823206569279560
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Inky_run_3
+      name: START GAME_3
       rect:
         serializedVersion: 2
-        x: 48
-        y: 0
-        width: 16
-        height: 16
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        x: 137
+        y: 41
+        width: 38
+        height: 35
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: df8d57435846df04c8179b71c55f2200
-      internalID: 1232422268
+      spriteID: a4737895b0178e810800000000000000
+      internalID: 1794808745067755338
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Inky_run_4
+      name: START GAME_4
       rect:
         serializedVersion: 2
-        x: 64
-        y: 0
-        width: 16
-        height: 16
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        x: 176
+        y: 41
+        width: 35
+        height: 35
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: aa57f39e3657be74bb1badaccb33e540
-      internalID: -913592894
+      spriteID: db6a7442e58c7e860800000000000000
+      internalID: 7559230806225823421
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Inky_run_5
+      name: START GAME_5
       rect:
         serializedVersion: 2
-        x: 80
-        y: 0
-        width: 16
-        height: 16
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        x: 234
+        y: 41
+        width: 38
+        height: 35
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: 070c2172b0bc8d744bac017005020017
-      internalID: 1432442143
+      spriteID: 79489c3bb08464de0800000000000000
+      internalID: -1349311823252716393
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Inky_run_6
+      name: START GAME_6
       rect:
         serializedVersion: 2
-        x: 96
-        y: 0
-        width: 16
-        height: 16
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        x: 273
+        y: 41
+        width: 38
+        height: 35
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: 3737c53beccf7594db2204eeb9491264
-      internalID: 66967555
+      spriteID: 14f8050af83f3d940800000000000000
+      internalID: 5319863383050194753
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Inky_run_7
+      name: START GAME_7
       rect:
         serializedVersion: 2
-        x: 112
-        y: 0
-        width: 16
-        height: 16
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        x: 312
+        y: 41
+        width: 45
+        height: 35
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: d369c08e0609c284f9c060fb7d490c71
-      internalID: 737607333
+      spriteID: d6b70ad0aa2e65200800000000000000
+      internalID: 168571256073911149
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Inky_run_8
+      name: START GAME_8
       rect:
         serializedVersion: 2
-        x: 128
-        y: 0
-        width: 16
-        height: 16
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        x: 357
+        y: 41
+        width: 38
+        height: 35
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: 36a2503bca83612468ab6706926503aa
-      internalID: -769908548
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Inky_run_9
-      rect:
-        serializedVersion: 2
-        x: 144
-        y: 0
-        width: 16
-        height: 16
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 4e7453f85a114384d90c249fd0905bf0
-      internalID: 1421611501
+      spriteID: 7d1408ca02a2231d0800000000000000
+      internalID: -3372586851125673513
       vertices: []
       indices: 
       edges: []
@@ -362,7 +338,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 4b20e315ea8d13c4aac5e4e9a0b23c9f
+    spriteID: 5e97eb03825dee720800000000000000
     internalID: 0
     vertices: []
     indices: 
@@ -370,20 +346,17 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     spriteCustomMetadata:
-      entries:
-      - key: SpriteEditor.SliceSettings
-        value: '{"sliceOnImport":false,"gridCellCount":{"x":10.0,"y":1.0},"gridSpriteSize":{"x":16.0,"y":16.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.0},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":7,"pivotUnitMode":0,"slicingType":2,"keepEmptyRects":false,"isAlternate":false}'
+      entries: []
     nameFileIdTable:
-      Inky_run_0: -3890980514325383558
-      Inky_run_1: -192849960
-      Inky_run_2: 1835066660
-      Inky_run_3: 1232422268
-      Inky_run_4: -913592894
-      Inky_run_5: 1432442143
-      Inky_run_6: 66967555
-      Inky_run_7: 737607333
-      Inky_run_8: -769908548
-      Inky_run_9: 1421611501
+      START GAME_0: 2635582669524548162
+      START GAME_1: 5873908869559527254
+      START GAME_2: -2249823206569279560
+      START GAME_3: 1794808745067755338
+      START GAME_4: 7559230806225823421
+      START GAME_5: -1349311823252716393
+      START GAME_6: 5319863383050194753
+      START GAME_7: 168571256073911149
+      START GAME_8: -3372586851125673513
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
