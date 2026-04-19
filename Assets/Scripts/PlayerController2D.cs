@@ -32,6 +32,9 @@ public class PlayerController2D : MonoBehaviour
     [Header("Animators")]
     public RuntimeAnimatorController animatorControllerNormal;
     public RuntimeAnimatorController animatorControllerBloqueado;
+    [Header("Audio")]
+    public AudioSource audioSource;
+    public AudioClip resetClip; 
 
     private Vector2 moveInput;
     private bool jumpPressed;
@@ -192,6 +195,7 @@ public class PlayerController2D : MonoBehaviour
     {
         SpawnVisualBurst();
         StartCoroutine(DelayedReset());
+
     }
 
     private System.Collections.IEnumerator DelayedReset()
