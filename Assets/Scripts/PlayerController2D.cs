@@ -35,6 +35,8 @@ public class PlayerController2D : MonoBehaviour
     [Header("Audio")]
     public AudioSource audioSource;
     public AudioClip resetClip; 
+    public AudioClip JumpClip; 
+    public AudioClip warpClip; 
 
     [Header("Coyote Time")]
     public float coyoteTime = 0.15f; // Duración del coyote time en segundos
@@ -89,6 +91,7 @@ public class PlayerController2D : MonoBehaviour
     {
         if (jumpPressed && coyoteTimeCounter > 0f)
         {
+            audioSource.PlayOneShot(JumpClip);
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
             coyoteTimeCounter = 0f; // Evita saltos dobles durante el coyote time
         }
@@ -205,6 +208,7 @@ public class PlayerController2D : MonoBehaviour
     }
     public void OnResetStage()
     {
+        audioSource.PlayOneShot(resetClip);
         SpawnVisualBurst();
         StartCoroutine(DelayedReset());
 
