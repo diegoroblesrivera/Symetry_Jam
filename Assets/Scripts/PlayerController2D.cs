@@ -14,9 +14,10 @@ public class PlayerController2D : MonoBehaviour
     public LayerMask groundLayer;
 
     [Header("Components")]
-    public Rigidbody2D rb;
-    public SpriteRenderer spriteRenderer;
-    public Animator animator;
+    public Rigidbody2D rb { get; private set; }
+    public SpriteRenderer spriteRenderer { get; private set; }
+    public Animator animator { get; private set; }
+    public AudioSource audioSource { get; private set; }
 
     [Header("Spawn")]
     public GameObject plataformaPrefab;
@@ -33,7 +34,6 @@ public class PlayerController2D : MonoBehaviour
     public RuntimeAnimatorController animatorControllerNormal;
     public RuntimeAnimatorController animatorControllerBloqueado;
     [Header("Audio")]
-    public AudioSource audioSource;
     public AudioClip resetClip; 
     public AudioClip JumpClip; 
     public AudioClip warpClip; 
@@ -47,6 +47,14 @@ public class PlayerController2D : MonoBehaviour
     private int bloquesRestantes;
     private bool puedeColocarBloques = true;
     private float coyoteTimeCounter;
+
+    void Awake()
+    {
+        rb = GetComponent<Rigidbody2D>();
+		spriteRenderer = GetComponent<SpriteRenderer>();
+		animator = GetComponent<Animator>();
+        audioSource = GetComponent<AudioSource>();
+    }
 
     void Start()
     {

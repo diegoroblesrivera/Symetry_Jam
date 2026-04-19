@@ -8,7 +8,7 @@ public class MiddleLine : MonoBehaviour
         // Verificamos que sea el jugador quien colision�
         if (collision.CompareTag("Player"))
         {
-            var player = collision.GetComponent<PlayerController>();
+            var player = collision.GetComponent<PlayerController2D>();
             player.SpawnVisualBurst();
             player.BloquearColocacionBloques(); // Bloquea la colocaci�n de bloques
 

@@ -46,6 +46,8 @@ GameObject:
   - component: {fileID: 5822347441243540134}
   - component: {fileID: 2033716654912487435}
   - component: {fileID: 8432782986565823377}
+  - component: {fileID: 6931536474611765054}
+  - component: {fileID: 6782277256224939037}
   m_Layer: 7
   m_Name: Inky
   m_TagString: Player
@@ -328,7 +330,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2910271901380435709}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 27f06d1a7cd40e249999c8d5fead152a, type: 3}
   m_Name: 
@@ -372,6 +374,68 @@ MonoBehaviour:
   _groundLayer:
     serializedVersion: 2
     m_Bits: 64
+--- !u!114 &6931536474611765054
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2910271901380435709}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a920071527c5d8a4daaaca49db1126a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerController2D
+  speed: 7
+  jumpForce: 12
+  fastFallMultiplier: 2
+  groundCheck: {fileID: 0}
+  groundRadius: 0.25
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  plataformaPrefab: {fileID: 393175715963067602, guid: 250e7e70b4454e04c9665a9889bbce26, type: 3}
+  distanciaSpawn: 0
+  centroX: 0
+  visualBurstPrefab: {fileID: 1162542154237701369, guid: f36fc244545f8d3418b5fd77227971fe, type: 3}
+  maxBloques: 3
+  animatorControllerNormal: {fileID: 9100000, guid: f2ef58407c3bbf94b848dea844e86da3, type: 2}
+  animatorControllerBloqueado: {fileID: 0}
+  audioSource: {fileID: 0}
+  resetClip: {fileID: 8300000, guid: c6b792072dab8014bb50d34cd34684d8, type: 3}
+  JumpClip: {fileID: 8300000, guid: e09d3e36ea6fd244e9bbc14ed5c21b97, type: 3}
+  warpClip: {fileID: 8300000, guid: 7a4900361fd30864ea79c66fdc20ae31, type: 3}
+  coyoteTime: 0.15
+--- !u!114 &6782277256224939037
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2910271901380435709}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.InputSystem::UnityEngine.InputSystem.PlayerInput
+  m_Actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
+  m_NotificationBehavior: 0
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents: []
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: 
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
 --- !u!1 &4001223153253002044
 GameObject:
   m_ObjectHideFlags: 0

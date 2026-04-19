@@ -6,8 +6,8 @@ public class DeadTrigger : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            var player = collision.GetComponent<PlayerController>();
-            player.ResetStage();
+            var player = collision.GetComponent<PlayerController2D>();
+            player.OnResetStage();
 
         }
     }
