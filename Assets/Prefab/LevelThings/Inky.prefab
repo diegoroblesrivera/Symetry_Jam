@@ -389,7 +389,7 @@ MonoBehaviour:
   speed: 7
   jumpForce: 12
   fastFallMultiplier: 2
-  groundCheck: {fileID: 0}
+  groundCheck: {fileID: 1701688963842914747}
   groundRadius: 0.25
   groundLayer:
     serializedVersion: 2
@@ -401,7 +401,6 @@ MonoBehaviour:
   maxBloques: 3
   animatorControllerNormal: {fileID: 9100000, guid: f2ef58407c3bbf94b848dea844e86da3, type: 2}
   animatorControllerBloqueado: {fileID: 0}
-  audioSource: {fileID: 0}
   resetClip: {fileID: 8300000, guid: c6b792072dab8014bb50d34cd34684d8, type: 3}
   JumpClip: {fileID: 8300000, guid: e09d3e36ea6fd244e9bbc14ed5c21b97, type: 3}
   warpClip: {fileID: 8300000, guid: 7a4900361fd30864ea79c66fdc20ae31, type: 3}
