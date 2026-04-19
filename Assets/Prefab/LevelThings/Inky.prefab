@@ -383,6 +383,8 @@ MonoBehaviour:
   centroX: 0
   visualBurstPrefab: {fileID: 1162542154237701369, guid: f36fc244545f8d3418b5fd77227971fe, type: 3}
   maxBloques: 3
+  animatorControllerNormal: {fileID: 9100000, guid: c6dc2efff0fb8d440aa54e1f15175cb0, type: 2}
+  animatorControllerBloqueado: {fileID: 9100000, guid: f2ef58407c3bbf94b848dea844e86da3, type: 2}
 --- !u!1 &3567288199439662094
 GameObject:
   m_ObjectHideFlags: 0

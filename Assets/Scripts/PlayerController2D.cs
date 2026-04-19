@@ -29,6 +29,10 @@ public class PlayerController2D : MonoBehaviour
     [Header("Bloques")]
     public int maxBloques = 3; // Límite inicial de bloques
 
+    [Header("Animators")]
+    public RuntimeAnimatorController animatorControllerNormal;
+    public RuntimeAnimatorController animatorControllerBloqueado;
+
     private Vector2 moveInput;
     private bool jumpPressed;
     private bool isGrounded;
@@ -137,6 +141,10 @@ public class PlayerController2D : MonoBehaviour
     public void BloquearColocacionBloques()
     {
         puedeColocarBloques = false;
+        if (animator != null && animatorControllerBloqueado != null)
+        {
+            animator.runtimeAnimatorController = animatorControllerBloqueado;
+        }
     }
 
     // Modifica SpawnPlataforma para respetar el límite y el bloqueo
@@ -145,7 +153,6 @@ public class PlayerController2D : MonoBehaviour
         if (!puedeColocarBloques || bloquesRestantes <= 0)
             return;
 
-        // Buscar el objeto Plataformas_Dinamicas en la escena
         GameObject plataformasDinamicas = GameObject.Find("Plataformas_Dinamicas");
         if (plataformasDinamicas == null)
         {
@@ -153,22 +160,27 @@ public class PlayerController2D : MonoBehaviour
             return;
         }
 
-        // Dirección según hacia dónde mira el personaje
         float direccion = spriteRenderer.flipX ? 1 : -1;
-
         Vector3 posicion = transform.position + Vector3.down * 0.6f;
-
-        // Spawn original
-        Instantiate(plataformaPrefab, posicion, Quaternion.identity, plataformasDinamicas.transform);
-
-        // Calcular espejo
         float xEspejo = 2 * centroX - posicion.x;
         Vector3 posicionEspejo = new Vector3(xEspejo, posicion.y, posicion.z);
 
-        // Spawn espejo
-        Instantiate(plataformaPrefab, posicionEspejo, Quaternion.identity, plataformasDinamicas.transform);
+        // Instancia el bloque debajo del jugador (normal)
+        GameObject bloque = Instantiate(plataformaPrefab, posicion, Quaternion.identity, plataformasDinamicas.transform);
+
+        // Instancia el bloque espejado (blanco)
+        GameObject bloqueEspejo = Instantiate(plataformaPrefab, posicionEspejo, Quaternion.identity, plataformasDinamicas.transform);
+        CambiarColorABlanco(bloqueEspejo);
 
         bloquesRestantes--;
+    }
+
+    // Método auxiliar para cambiar el color a blanco
+    private void CambiarColorABlanco(GameObject bloque)
+    {
+        var sr = bloque.GetComponent<SpriteRenderer>();
+        if (sr != null)
+            sr.color = Color.white;
     }
 
     public void SpawnVisualBurst()

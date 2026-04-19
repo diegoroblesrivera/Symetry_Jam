@@ -85,8 +85,8 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 27
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 6485688445642115618, guid: 2c6aabddc87308d4a8ee6b6bb052d678, type: 3}
-  m_Color: {r: 0.9843137, g: 1, b: 0, a: 1}
+  m_Sprite: {fileID: 7929374521142344163, guid: 6849032c46441d2479a252f855b2a98d, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -259,8 +259,8 @@ ParticleSystem:
     enabled: 1
     startLifetime:
       serializedVersion: 2
-      minMaxState: 3
-      scalar: 0.125
+      minMaxState: 0
+      scalar: 1
       minScalar: 0.5
       maxCurve:
         serializedVersion: 2
@@ -313,7 +313,7 @@ ParticleSystem:
     startSpeed:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 2
+      scalar: 0
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -367,7 +367,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 0.65742224, g: 0.688, b: 0.00509631, a: 1}
+      maxColor: {r: 0, g: 0, b: 0, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -755,7 +755,7 @@ ParticleSystem:
     gravityModifier:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0
+      scalar: 0.16
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -895,7 +895,7 @@ ParticleSystem:
     sphericalDirectionAmount: 0
     randomPositionAmount: 0
     radius:
-      value: 0.29
+      value: 0.03
       mode: 0
       spread: 0
       speed:
@@ -1014,7 +1014,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 7.8
+      scalar: 1.5
       minScalar: 10
       maxCurve:
         serializedVersion: 2
@@ -5116,8 +5116,8 @@ ParticleSystem:
     enabled: 1
     startLifetime:
       serializedVersion: 2
-      minMaxState: 3
-      scalar: 0.125
+      minMaxState: 0
+      scalar: 1
       minScalar: 0.375
       maxCurve:
         serializedVersion: 2
@@ -5170,7 +5170,7 @@ ParticleSystem:
     startSpeed:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 1
+      scalar: 0
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -5224,7 +5224,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 0.5076819, g: 0.5283019, b: 0.002491996, a: 1}
+      maxColor: {r: 0, g: 0, b: 0, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -5612,7 +5612,7 @@ ParticleSystem:
     gravityModifier:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0
+      scalar: 0.16
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -5752,7 +5752,7 @@ ParticleSystem:
     sphericalDirectionAmount: 0
     randomPositionAmount: 0
     radius:
-      value: 0.29
+      value: 0.03
       mode: 0
       spread: 0
       speed:
@@ -5871,7 +5871,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 7.8
+      scalar: 1.5
       minScalar: 10
       maxCurve:
         serializedVersion: 2

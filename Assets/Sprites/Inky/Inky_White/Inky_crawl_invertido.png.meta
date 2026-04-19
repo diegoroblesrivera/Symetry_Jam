@@ -1,37 +1,10 @@
 fileFormatVersion: 2
-guid: a1c61689a34468d4280a5a0ca147e095
+guid: 4807057faadf7e54ca616c3b52680443
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 6088034343626230544
-    second: Inky_Idle_0
-  - first:
-      213: 4394897681271129776
-    second: Inky_Idle_1
-  - first:
-      213: -3928602145128884471
-    second: Inky_Idle_2
-  - first:
-      213: -7571697401332036520
-    second: Inky_Idle_3
-  - first:
-      213: -7958894946786319739
-    second: Inky_Idle_4
-  - first:
-      213: -1585213558768572183
-    second: Inky_Idle_5
-  - first:
-      213: -3139271978376806798
-    second: Inky_Idle_6
-  - first:
-      213: 8320356761522005783
-    second: Inky_Idle_7
-  - first:
-      213: 4689601064488134967
-    second: Inky_Idle_8
-  - first:
-      213: 3118280819246171797
-    second: Inky_Idle_9
+      213: -6139888929116145968
+    second: Inky_crawl_invertido_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -136,11 +109,24 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Inky_Idle_0
+      name: Inky_crawl_invertido_0
       rect:
         serializedVersion: 2
         x: 0
@@ -155,14 +141,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 01b4830dafa0d7450800000000000000
-      internalID: 6088034343626230544
+      spriteID: 0d6bdabac8bbacaa0800000000000000
+      internalID: -6139888929116145968
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Inky_Idle_1
+      name: Inky_crawl_invertido_1
       rect:
         serializedVersion: 2
         x: 16
@@ -175,16 +161,16 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 0b68a5ce720ddfc30800000000000000
-      internalID: 4394897681271129776
+      spriteID: 46c9edd1bcee483419b55a8feb2a0a2a
+      internalID: -1616529322
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Inky_Idle_2
+      name: Inky_crawl_invertido_2
       rect:
         serializedVersion: 2
         x: 32
@@ -197,16 +183,16 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 90751c3e92dca79c0800000000000000
-      internalID: -3928602145128884471
+      spriteID: ef11e86e5f9510b4b89565aabf24b18c
+      internalID: -54216932
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Inky_Idle_3
+      name: Inky_crawl_invertido_3
       rect:
         serializedVersion: 2
         x: 48
@@ -219,16 +205,16 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 85c0bde745debe690800000000000000
-      internalID: -7571697401332036520
+      spriteID: 5510a41ff61fd4b42b55a01440ee5a45
+      internalID: -1529901648
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Inky_Idle_4
+      name: Inky_crawl_invertido_4
       rect:
         serializedVersion: 2
         x: 64
@@ -241,16 +227,16 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 5826624c6335c8190800000000000000
-      internalID: -7958894946786319739
+      spriteID: 0ce5ff356e2125a46b0d58d4ea9a602e
+      internalID: -1034788747
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Inky_Idle_5
+      name: Inky_crawl_invertido_5
       rect:
         serializedVersion: 2
         x: 80
@@ -263,16 +249,16 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 9e86778caa0300ae0800000000000000
-      internalID: -1585213558768572183
+      spriteID: 7f748b9cb7b7b604689f3082a4e6cb76
+      internalID: 1052109279
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Inky_Idle_6
+      name: Inky_crawl_invertido_6
       rect:
         serializedVersion: 2
         x: 96
@@ -285,16 +271,16 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 27e338ba4c01f64d0800000000000000
-      internalID: -3139271978376806798
+      spriteID: dde390941281df74a93497e14511f53b
+      internalID: 1365180719
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Inky_Idle_7
+      name: Inky_crawl_invertido_7
       rect:
         serializedVersion: 2
         x: 112
@@ -307,16 +293,16 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 717e9073468d77370800000000000000
-      internalID: 8320356761522005783
+      spriteID: 9928c24d164a15c43aa0ed916ece9a1c
+      internalID: 1464464930
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Inky_Idle_8
+      name: Inky_crawl_invertido_8
       rect:
         serializedVersion: 2
         x: 128
@@ -329,16 +315,16 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 739eb13525fc41140800000000000000
-      internalID: 4689601064488134967
+      spriteID: bf2c906a146d4b74588893fc4f33563e
+      internalID: 457189371
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Inky_Idle_9
+      name: Inky_crawl_invertido_9
       rect:
         serializedVersion: 2
         x: 144
@@ -351,10 +337,98 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 596051d32eb564b20800000000000000
-      internalID: 3118280819246171797
+      spriteID: f6d7e0180f144f74696461a663622e6a
+      internalID: -480753262
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Inky_crawl_invertido_10
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 0
+        width: 16
+        height: 16
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e01bf0b21b90063459d654f9c6cf7b57
+      internalID: -1286403344
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Inky_crawl_invertido_11
+      rect:
+        serializedVersion: 2
+        x: 176
+        y: 0
+        width: 16
+        height: 16
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5d2c9301932bd5d468aa2cfc752b7e45
+      internalID: 2129710091
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Inky_crawl_invertido_12
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 0
+        width: 16
+        height: 16
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8044bfba7df9dab4b82ba151002b659d
+      internalID: -1420836248
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Inky_crawl_invertido_13
+      rect:
+        serializedVersion: 2
+        x: 208
+        y: 0
+        width: 16
+        height: 16
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 307220700e135d7488706a1540f8ce72
+      internalID: -1514717117
       vertices: []
       indices: 
       edges: []
@@ -363,7 +437,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 36d038c8decfb8e478c9a371c5bbddb9
+    spriteID: bbd280c6b5c5cdc4b82effbeafab19ce
     internalID: 0
     vertices: []
     indices: 
@@ -373,18 +447,22 @@ TextureImporter:
     spriteCustomMetadata:
       entries:
       - key: SpriteEditor.SliceSettings
-        value: '{"sliceOnImport":false,"gridCellCount":{"x":10.0,"y":1.0},"gridSpriteSize":{"x":16.0,"y":16.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.0},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":7,"pivotUnitMode":0,"slicingType":2,"keepEmptyRects":false,"isAlternate":false}'
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":16.0,"y":16.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.0},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":7,"pivotUnitMode":0,"slicingType":1,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
-      Inky_Idle_0: 6088034343626230544
-      Inky_Idle_1: 4394897681271129776
-      Inky_Idle_2: -3928602145128884471
-      Inky_Idle_3: -7571697401332036520
-      Inky_Idle_4: -7958894946786319739
-      Inky_Idle_5: -1585213558768572183
-      Inky_Idle_6: -3139271978376806798
-      Inky_Idle_7: 8320356761522005783
-      Inky_Idle_8: 4689601064488134967
-      Inky_Idle_9: 3118280819246171797
+      Inky_crawl_invertido_0: -6139888929116145968
+      Inky_crawl_invertido_1: -1616529322
+      Inky_crawl_invertido_10: -1286403344
+      Inky_crawl_invertido_11: 2129710091
+      Inky_crawl_invertido_12: -1420836248
+      Inky_crawl_invertido_13: -1514717117
+      Inky_crawl_invertido_2: -54216932
+      Inky_crawl_invertido_3: -1529901648
+      Inky_crawl_invertido_4: -1034788747
+      Inky_crawl_invertido_5: 1052109279
+      Inky_crawl_invertido_6: 1365180719
+      Inky_crawl_invertido_7: 1464464930
+      Inky_crawl_invertido_8: 457189371
+      Inky_crawl_invertido_9: -480753262
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

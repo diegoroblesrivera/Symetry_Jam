@@ -21,7 +21,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 10980f5a6daf4b747aac81b75e83f8a3, type: 2}
+  m_Motion: {fileID: 7400000, guid: fba4a3fa07408b54aa571f7fac22834c, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -337,7 +337,7 @@ AnimatorController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: AnimCRL_Inky
+  m_Name: AnimCRL_Inky2
   serializedVersion: 6
   m_AnimatorParameters:
   - m_Name: Grounded
@@ -408,7 +408,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 98cbd71fc2bc89443a6c783b5be72a9b, type: 2}
+  m_Motion: {fileID: 7400000, guid: 2987c8865292fbd4893fef6ad6a7ba30, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -500,7 +500,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: d41ab10298c9cb44883fa37e91fcd61c, type: 2}
+  m_Motion: {fileID: 7400000, guid: d62794bae3ddc5a45b98aa054c6d8fde, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -529,7 +529,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 5997fe4fa8cc98c41ba32e221a8ab5d2, type: 2}
+  m_Motion: {fileID: 7400000, guid: c9dedff559e98564ca32b3df271a88e6, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
