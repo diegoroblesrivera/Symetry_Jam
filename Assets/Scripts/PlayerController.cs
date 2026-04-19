@@ -35,7 +35,6 @@ public class PlayerController : MonoBehaviour
 	public float jumpTimeToApex; //Time between applying the jump force and reaching the desired jump height. These values also control the player's gravity and jump force.
 	[HideInInspector] public float jumpForce; //The actual force applied (upwards) to the player when they jump.
 
-	[Header("Both Jumps")]
 	public float jumpCutGravityMult; //Multiplier to increase gravity if the player releases thje jump button while still jumping
 	[Range(0f, 1)] public float jumpHangGravityMult; //Reduces gravity while close to the apex (desired max height) of the jump
 	public float jumpHangTimeThreshold; //Speeds (close to 0) where the player will experience extra "jump hang". The player's velocity.y is closest to 0 at the jump's apex (think of the gradient of a parabola or quadratic function)
@@ -43,38 +42,47 @@ public class PlayerController : MonoBehaviour
 	public float jumpHangAccelerationMult; 
 	public float jumpHangMaxSpeedMult; 				
 
-	[Header("Wall Jump")]
-	public Vector2 wallJumpForce; //The actual force (this time set by us) applied to the player when wall jumping.
-	[Space(5)]
-	[Range(0f, 1f)] public float wallJumpRunLerp; //Reduces the effect of player's movement while wall jumping.
-	[Range(0f, 1.5f)] public float wallJumpTime; //Time after wall jumping the player's movement is slowed for.
-	public bool doTurnOnWallJump; //Player will rotate to face wall jumping direction
     #region COMPONENTS
-	//Script to handle all player animations, all references can be safely removed if you're importing into your own project.
+    public Rigidbody2D rb2d { get; private set; }
+    public SpriteRenderer spriteRenderer { get; private set; }
+    public Animator animator { get; private set; }
+    [Header("Animators")]
+    public RuntimeAnimatorController animatorControllerNormal;
+    public RuntimeAnimatorController animatorControllerBloqueado;
+    [Header("Audio")]
+    public AudioSource audioSource;
+    public AudioClip resetClip; 
+
 	#endregion
     [Header("Assists")]
 	[Range(0.01f, 0.5f)] public float coyoteTime; //Grace period after falling off a platform, where you can still jump
 	[Range(0.01f, 0.5f)] public float jumpInputBufferTime; //Grace period after pressing jump where a jump will be automatically performed once the requirements (eg. being grounded) are met.
 
+	[Space(20)]
+
+    [Header("Bloques")]
+    public int maxBloques = 3; // Límite inicial de bloques
+    public int bloquesIniciales = 3; // Bloques Iniciales
+    private int bloquesRestantes;
+    private bool puedeColocarBloques = true;
+
+    [Header("Spawn")]
+    public GameObject plataformaPrefab;
+    public float distanciaSpawn = 3f;
+    public float centroX = 0f;
+	
 	#region STATE PARAMETERS
 	//Variables control the various actions the player can perform at any time.
 	//These are fields which can are public allowing for other sctipts to read them
 	//but can only be privately written to.
 	public bool IsFacingRight { get; private set; }
 	public bool IsJumping { get; private set; }
-	public bool IsWallJumping { get; private set; }
 	public float LastOnGroundTime { get; private set; }
-	public float LastOnWallTime { get; private set; }
-	public float LastOnWallRightTime { get; private set; }
-	public float LastOnWallLeftTime { get; private set; }
 	
 	//Jump
 	private bool _isJumpCut;
 	private bool _isJumpFalling;
 
-	//Wall Jump
-	private float _wallJumpStartTime;
-	private int _lastWallJumpDir;
 	#endregion
 
 	#region INPUT PARAMETERS
@@ -83,13 +91,13 @@ public class PlayerController : MonoBehaviour
 	public float LastPressedJumpTime { get; private set; }
 	#endregion
 
+    [Header("VisualBurst")]
+    public GameObject visualBurstPrefab;
+
 	#region CHECK PARAMETERS
 	//Set all of these up in the inspector
 	[Header("Checks")] 
 	[SerializeField] private Transform _groundCheckPoint;
-	[SerializeField] private Transform _frontWallCheckPoint;
-	[SerializeField] private Transform _backWallCheckPoint;
-	[SerializeField] private Vector2 _wallCheckSize = new Vector2(0.5f, 1f);
 	[SerializeField] private Vector2 _groundCheckSize = new Vector2(0.49f, 0.03f);
 	#endregion
 
@@ -100,20 +108,23 @@ public class PlayerController : MonoBehaviour
 
     private InputAction moveAction;
 	private InputAction jumpAction;
-    public Rigidbody2D rb2d { get; private set; }
+	private InputAction spawnAction;
+	private InputAction resetStageAction;
 
     void Start()
     {
 		IsFacingRight = true;
 		IsJumping = false;
+        bloquesRestantes = bloquesIniciales;
     }
 
     void Awake()
     {
-        // Busca la acción "Move" dentro del InputSystem_Actions
-        moveAction = InputSystem.actions.FindAction("Move");
-		jumpAction = InputSystem.actions.FindAction("Jump");
+		InputManagement();
         rb2d = GetComponent<Rigidbody2D>();
+		spriteRenderer = GetComponent<SpriteRenderer>();
+		animator = GetComponent<Animator>();
+		
     }
 
 	private void OnValidate()
@@ -136,25 +147,20 @@ public class PlayerController : MonoBehaviour
 		#endregion
 	}
 
-    void OnEnable()
-    {
-        moveAction.Enable();
-    }
-
-    void OnDisable()
-    {
-        moveAction.Disable();
-    }
+	private void InputManagement()
+	{
+		// Busca la acción "Move" dentro del InputSystem_Actions
+        moveAction = InputSystem.actions.FindAction("Move");
+		jumpAction = InputSystem.actions.FindAction("Jump");
+		spawnAction = InputSystem.actions.FindAction("Spawn");
+		resetStageAction = InputSystem.actions.FindAction("RestartLevel");
+	}
 
     // Update is called once per frame
     void Update()
     {
 		#region TIMERS
         LastOnGroundTime -= Time.deltaTime;
-
-		LastOnWallTime -= Time.deltaTime;
-		LastOnWallRightTime -= Time.deltaTime;
-		LastOnWallLeftTime -= Time.deltaTime;
 
 		LastPressedJumpTime -= Time.deltaTime;
 		#endregion
@@ -175,6 +181,14 @@ public class PlayerController : MonoBehaviour
 		{
 			OnJumpUpInput();
 		}
+		if (spawnAction.WasPerformedThisFrame())
+		{
+        	SpawnPlataforma();
+		}
+		if (resetStageAction.WasPerformedThisFrame())
+		{
+        	ResetStage();
+		}
 
 		#region COLLISION CHECKS
 		if (!IsJumping)
@@ -182,26 +196,8 @@ public class PlayerController : MonoBehaviour
 			//Ground Check
 			if (Physics2D.OverlapBox(_groundCheckPoint.position, _groundCheckSize, 0, _groundLayer)) //checks if set box overlaps with ground
 			{
-				if(LastOnGroundTime < -0.1f)
-                {
-					//AnimHandler.justLanded = true;
-                }
-
 				LastOnGroundTime = coyoteTime; //if so sets the lastGrounded to coyoteTime
-            }		
-
-			//Right Wall Check
-			if (((Physics2D.OverlapBox(_frontWallCheckPoint.position, _wallCheckSize, 0, _groundLayer) && IsFacingRight)
-					|| (Physics2D.OverlapBox(_backWallCheckPoint.position, _wallCheckSize, 0, _groundLayer) && !IsFacingRight)) && !IsWallJumping)
-				LastOnWallRightTime = coyoteTime;
-
-			//Right Wall Check
-			if (((Physics2D.OverlapBox(_frontWallCheckPoint.position, _wallCheckSize, 0, _groundLayer) && !IsFacingRight)
-				|| (Physics2D.OverlapBox(_backWallCheckPoint.position, _wallCheckSize, 0, _groundLayer) && IsFacingRight)) && !IsWallJumping)
-				LastOnWallLeftTime = coyoteTime;
-
-			//Two checks needed for both left and right walls since whenever the play turns the wall checkPoints swap sides
-			LastOnWallTime = Mathf.Max(LastOnWallLeftTime, LastOnWallRightTime);
+            }
 		}
 		#endregion
 		#region JUMP CHECKS
@@ -211,13 +207,7 @@ public class PlayerController : MonoBehaviour
 
 			_isJumpFalling = true;
 		}
-
-		if (IsWallJumping && Time.time - _wallJumpStartTime > wallJumpTime)
-		{
-			IsWallJumping = false;
-		}
-
-		if (LastOnGroundTime > 0 && !IsJumping && !IsWallJumping)
+		if (LastOnGroundTime > 0 && !IsJumping)
         {
 			_isJumpCut = false;
 
@@ -226,25 +216,11 @@ public class PlayerController : MonoBehaviour
 		if (CanJump() && LastPressedJumpTime > 0)
 		{
 			IsJumping = true;
-			IsWallJumping = false;
 			_isJumpCut = false;
 			_isJumpFalling = false;
 			Jump();
 
 			//AnimHandler.startedJumping = true;
-		}
-		//WALL JUMP
-		else if (CanWallJump() && LastPressedJumpTime > 0)
-		{
-			IsWallJumping = true;
-			IsJumping = false;
-			_isJumpCut = false;
-			_isJumpFalling = false;
-
-			_wallJumpStartTime = Time.time;
-			_lastWallJumpDir = (LastOnWallRightTime > 0) ? -1 : 1;
-
-			WallJump(_lastWallJumpDir);
 		}
 		#endregion
 		#region GRAVITY
@@ -262,7 +238,7 @@ public class PlayerController : MonoBehaviour
 			SetGravityScale(gravityScale * jumpCutGravityMult);
 			rb2d.linearVelocity = new Vector2(rb2d.linearVelocity.x, Mathf.Max(rb2d.linearVelocityY, -maxFallSpeed));
 		}
-		else if ((IsJumping || IsWallJumping || _isJumpFalling) && Mathf.Abs(rb2d.linearVelocityY) < jumpHangTimeThreshold)
+		else if ((IsJumping || _isJumpFalling) && Mathf.Abs(rb2d.linearVelocityY) < jumpHangTimeThreshold)
 		{
 			SetGravityScale(gravityScale * jumpHangGravityMult);
 		}
@@ -279,6 +255,9 @@ public class PlayerController : MonoBehaviour
 			SetGravityScale(gravityScale);
 		}
 		#endregion
+
+
+		HandleAnimations();
     }
 
     void FixedUpdate()
@@ -299,7 +278,7 @@ public class PlayerController : MonoBehaviour
 
 	public void OnJumpUpInput()
 	{
-		if (CanJumpCut() || CanWallJumpCut())
+		if (CanJumpCut())
 			_isJumpCut = true;
 	}
 
@@ -330,7 +309,7 @@ public class PlayerController : MonoBehaviour
 
 		#region Add Bonus Jump Apex Acceleration
 		//Increase are acceleration and maxSpeed when at the apex of their jump, makes the jump feel a bit more bouncy, responsive and natural
-		if ((IsJumping || IsWallJumping || _isJumpFalling) && Mathf.Abs(rb2d.linearVelocity.y) < jumpHangTimeThreshold)
+		if ((IsJumping || _isJumpFalling) && Mathf.Abs(rb2d.linearVelocity.y) < jumpHangTimeThreshold)
 		{
 			accelRate *= jumpHangAccelerationMult;
 			targetSpeed *= jumpHangMaxSpeedMult;
@@ -362,29 +341,6 @@ public class PlayerController : MonoBehaviour
         //playeranim.SetTrigger("jump");
 	}
 
-	
-	private void WallJump(int dir)
-	{
-		//Ensures we can't call Wall Jump multiple times from one press
-		LastPressedJumpTime = 0;
-		LastOnGroundTime = 0;
-		LastOnWallRightTime = 0;
-		LastOnWallLeftTime = 0;
-
-		#region Perform Wall Jump
-		Vector2 force = new Vector2(wallJumpForce.x, wallJumpForce.y);
-		force.x *= dir; //apply force in opposite direction of wall
-
-		if (Mathf.Sign(rb2d.linearVelocityX) != Mathf.Sign(force.x))
-			force.x -= rb2d.linearVelocityX;
-
-		if (rb2d.linearVelocityY < 0) //checks whether player is falling, if so we subtract the velocity.y (counteracting force of gravity). This ensures the player always reaches our desired jump force or greater
-			force.y -= rb2d.linearVelocityY;
-
-		rb2d.AddForce(force, ForceMode2D.Impulse);
-		#endregion
-	}
-
 	private void Turn()
 	{
 		//stores scale and flips the player along the x axis, 
@@ -408,21 +364,11 @@ public class PlayerController : MonoBehaviour
 		return LastOnGroundTime > 0 && !IsJumping;
     }
 
-	private bool CanWallJump()
-    {
-		return LastPressedJumpTime > 0 && LastOnWallTime > 0 && LastOnGroundTime <= 0 && (!IsWallJumping ||
-			 (LastOnWallRightTime > 0 && _lastWallJumpDir == 1) || (LastOnWallLeftTime > 0 && _lastWallJumpDir == -1));
-	}
-
 	private bool CanJumpCut()
     {
 		return IsJumping && rb2d.linearVelocityY > 0;
     }
 
-	private bool CanWallJumpCut()
-	{
-		return IsWallJumping && rb2d.linearVelocityY > 0;
-	}
     #endregion
 
 	#region EDITOR METHODS
@@ -430,9 +376,108 @@ public class PlayerController : MonoBehaviour
     {
 		Gizmos.color = Color.green;
 		Gizmos.DrawWireCube(_groundCheckPoint.position, _groundCheckSize);
-		Gizmos.color = Color.blue;
-		Gizmos.DrawWireCube(_frontWallCheckPoint.position, _wallCheckSize);
-		Gizmos.DrawWireCube(_backWallCheckPoint.position, _wallCheckSize);
 	}
     #endregion
+
+    void HandleAnimations()
+    {
+        animator.SetFloat("Speed", Mathf.Abs(_moveInput.x));
+        animator.SetBool("Grounded", LastOnGroundTime > 0);
+        animator.SetBool("Crouch", _moveInput.y < -0.5f && LastOnGroundTime > 0);
+        animator.SetBool("FastFall", !(LastOnGroundTime > 0) && _moveInput.y < -0.5f);
+        animator.SetFloat("YVelocity", rb2d.linearVelocityY);
+
+    }
+
+
+    // Llama este método para aumentar el límite desde un item
+    public void AumentarLimiteBloques(int cantidad)
+    {
+        maxBloques += cantidad;
+        bloquesRestantes += cantidad;
+
+        ActualizarTransparencia();
+    }
+
+    // Llama este método desde MiddleLine para bloquear la colocación
+    public void BloquearColocacionBloques()
+    {
+        puedeColocarBloques = false;
+        if (animator != null && animatorControllerBloqueado != null)
+        {
+            animator.runtimeAnimatorController = animatorControllerBloqueado;
+        }
+        bloquesRestantes = 3; // Resetea los bloques restantes al límite inicial
+        ActualizarTransparencia();
+    }
+
+    // Modifica SpawnPlataforma para respetar el límite y el bloqueo
+    void SpawnPlataforma()
+    {
+        if (!puedeColocarBloques || bloquesRestantes <= 0)
+            return;
+
+        GameObject plataformasDinamicas = GameObject.Find("Plataformas_Dinamicas");
+        if (plataformasDinamicas == null)
+        {
+            Debug.LogWarning("No se encontró el objeto Plataformas_Dinamicas en la escena.");
+            return;
+        }
+
+        float direccion = spriteRenderer.flipX ? 1 : -1;
+        Vector3 posicion = transform.position + Vector3.down * 0.6f;
+        float xEspejo = 2 * centroX - posicion.x;
+        Vector3 posicionEspejo = new Vector3(xEspejo, posicion.y, posicion.z);
+
+        GameObject bloque = Instantiate(plataformaPrefab, posicion, Quaternion.identity, plataformasDinamicas.transform);
+        GameObject bloqueEspejo = Instantiate(plataformaPrefab, posicionEspejo, Quaternion.identity, plataformasDinamicas.transform);
+        CambiarColorABlanco(bloqueEspejo);
+
+        bloquesRestantes--;
+        ActualizarTransparencia();
+    }
+
+    private void CambiarColorABlanco(GameObject bloque)
+    {
+        var sr = bloque.GetComponent<SpriteRenderer>();
+        if (sr != null)
+            sr.color = Color.white;
+    }
+	
+    public void SpawnVisualBurst()
+    {
+        Instantiate(visualBurstPrefab, transform.position, Quaternion.identity, null);
+        Destroy(visualBurstPrefab,5f);
+    }
+    public void ResetStage()
+    {
+        SpawnVisualBurst();
+        StartCoroutine(DelayedReset());
+    }
+
+    private System.Collections.IEnumerator DelayedReset()
+    {
+        yield return null; // Espera un frame
+        LevelManager.Instance.RestartCurrentLevel();
+    }
+
+    private void ActualizarTransparencia()
+    {
+        float alpha = 1f;
+        if (bloquesRestantes >= 3)
+            alpha = 1f;
+        else if (bloquesRestantes == 2)
+            alpha = 0.90f;
+        else if (bloquesRestantes == 1)
+            alpha = 0.80f;
+        else if (bloquesRestantes == 0)
+            alpha = 0.40f;
+
+        if (spriteRenderer != null)
+        {
+            Color c = spriteRenderer.color;
+            c.a = alpha;
+            spriteRenderer.color = c;
+        }
+    }
 }
