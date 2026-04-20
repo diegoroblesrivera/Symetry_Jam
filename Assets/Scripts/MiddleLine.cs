@@ -3,27 +3,54 @@ using UnityEngine;
 public class MiddleLine : MonoBehaviour
 {
     public GameObject Sonidi;
-    public GameObject ContinueLevelSpawnPoint; // Referencia al siguiente trigger de nivel
+    public GameObject ContinueLevelSpawnPoint;
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        // Verificamos que sea el jugador quien colision�
-        if (collision.CompareTag("Player"))
-        {
-            Instantiate(Sonidi, transform.position, Quaternion.identity, null);
-            Destroy(Sonidi, 5f);
-            var player = collision.GetComponent<PlayerController2D>();
-            player.SpawnVisualBurst();
-            player.BloquearColocacionBloques(); // Bloquea la colocaci�n de bloques
+        if (!collision.CompareTag("Player")) return;
 
-            collision.transform.position = ContinueLevelSpawnPoint.transform.position; // Teletransportamos al jugador al siguiente trigger
+        // 🔊 SONIDO
+        if (Sonidi != null)
+        {
+            var instancia = Instantiate(Sonidi, transform.position, Quaternion.identity);
+            Destroy(instancia, 5f);
+        }
+        else
+        {
+            Debug.LogWarning("Sonidi no asignado");
+        }
+
+        // 🧠 PLAYER (más seguro)
+        PlayerController2D player = collision.GetComponentInParent<PlayerController2D>();
+
+        if (player != null)
+        {
+            player.SpawnVisualBurst();
+            player.BloquearColocacionBloques();
+        }
+        else
+        {
+            Debug.LogError("PlayerController2D no encontrado en el Player");
+        }
+
+        // 📍 TELEPORT (seguro)
+        if (ContinueLevelSpawnPoint != null)
+        {
+            collision.transform.position = ContinueLevelSpawnPoint.transform.position;
+
             if (collision.TryGetComponent<Rigidbody2D>(out Rigidbody2D rb))
             {
                 rb.linearVelocity = Vector2.zero;
-                // En versiones antiguas usa: rb.velocity = Vector2.zero;
             }
-            ContinueLevelSpawnPoint.SetActive(false); // Desactivamos el siguiente trigger para evitar que se active nuevamente 
-            this.gameObject.SetActive(false); // Desactivamos el trigger actual para evitar que se active nuevamente
-            
+
+            ContinueLevelSpawnPoint.SetActive(false);
         }
+        else
+        {
+            Debug.LogError("ContinueLevelSpawnPoint NO asignado");
+        }
+
+        // 🚫 DESACTIVAR
+        gameObject.SetActive(false);
     }
 }

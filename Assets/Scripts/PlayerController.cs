@@ -444,11 +444,17 @@ public class PlayerController : MonoBehaviour
             sr.color = Color.white;
     }
 	
-    public void SpawnVisualBurst()
-    {
-        Instantiate(visualBurstPrefab, transform.position, Quaternion.identity, null);
-        Destroy(visualBurstPrefab,5f);
-    }
+    // public void SpawnVisualBurst()
+    // {
+    //     Instantiate(visualBurstPrefab, transform.position, Quaternion.identity, null);
+    //     Destroy(visualBurstPrefab,5f);
+    // }
+
+	public void SpawnVisualBurst()
+{
+    GameObject instancia = Instantiate(visualBurstPrefab, transform.position, Quaternion.identity);
+    Destroy(instancia, 5f);
+}
     public void ResetStage()
     {
         SpawnVisualBurst();

@@ -209,11 +209,17 @@ public class PlayerController2D : MonoBehaviour
             sr.color = Color.white;
     }
 
+    // public void SpawnVisualBurst()
+    // {
+    //     Instantiate(visualBurstPrefab, transform.position, Quaternion.identity, null);
+    //     Destroy(visualBurstPrefab,5f);
+    // }
+
     public void SpawnVisualBurst()
-    {
-        Instantiate(visualBurstPrefab, transform.position, Quaternion.identity, null);
-        Destroy(visualBurstPrefab,5f);
-    }
+{
+    GameObject instancia = Instantiate(visualBurstPrefab, transform.position, Quaternion.identity);
+    Destroy(instancia, 5f);
+}
     public void OnResetStage()
     {
         audioSource.PlayOneShot(resetClip);
