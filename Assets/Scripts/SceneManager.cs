@@ -11,6 +11,10 @@ public class LevelManager : MonoBehaviour
     private int currentLevelIndex = 0;
     private GameObject currentLevelInstance;
 
+    public GameObject canva1;
+    public GameObject canva2;  
+    public GameObject canva3;
+
     private void Awake()
     {
         // Singleton sencillo
@@ -28,7 +32,7 @@ public class LevelManager : MonoBehaviour
     private void Start()
     {
         // Carga automática del primer nivel (índice 0) al iniciar
-        LoadLevel(0);
+        //LoadLevel(0);
     }
 
     public void LoadLevel(int index)
@@ -37,7 +41,12 @@ public class LevelManager : MonoBehaviour
         if (index < 0 || index >= levelPrefabs.Count)
         {
             Debug.Log("¡Fin del juego! No hay más niveles.");
+            canva1.SetActive(true);
+            canva2.SetActive(false);
+            canva3.SetActive(true);
+            Destroy(currentLevelInstance);
             return;
+
         }
 
         // 1. Limpiar el nivel anterior (borra al jugador anterior, el mapa, etc.)
@@ -62,5 +71,10 @@ public class LevelManager : MonoBehaviour
     public void RestartCurrentLevel()
     {
         LoadLevel(currentLevelIndex);
+    }
+
+    public void CerrarJuego()
+    {
+          Application.Quit();
     }
 }

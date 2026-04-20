@@ -5021,6 +5021,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c69a6708f3073f846b0cf38be196e8f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
+  Sonidi: {fileID: 1713594640799715063, guid: c6a69f7a8f79772408938b7c229cbf01, type: 3}
   ContinueLevelSpawnPoint: {fileID: 949778553544322604}
 --- !u!58 &3116092920560604304
 CircleCollider2D:

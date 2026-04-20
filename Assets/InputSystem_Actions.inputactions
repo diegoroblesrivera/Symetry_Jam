@@ -560,6 +560,17 @@
                 },
                 {
                     "name": "",
+                    "id": "899f1732-055b-48c1-a2d3-61edc1f4de24",
+                    "path": "<Keyboard>/ctrl",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Spawn",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "d1d278ef-d829-439d-9111-d83abd405218",
                     "path": "<Keyboard>/q",
                     "interactions": "",
@@ -573,6 +584,17 @@
                     "name": "",
                     "id": "2291ec4b-1062-474e-b166-4e7b5b6c53f5",
                     "path": "<Gamepad>/leftShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "RestartLevel",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2c70fdbe-489b-44ef-b9d9-ad9847eb6f45",
+                    "path": "<Keyboard>/r",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
