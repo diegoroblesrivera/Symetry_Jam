@@ -29,6 +29,9 @@ public class PlayerController2D : MonoBehaviour
     public float jumpForce = 12f;
     public float coyoteTime = 0.15f;
     public float fastFallMultiplier = 2f;
+    public float jumpBufferTime = 0.1f;
+    private float jumpBufferCounter;
+    private float groundedCooldown = 0.1f;
 
     [Header("Chequeo de suelo")]
     public Transform groundCheck;
@@ -73,10 +76,28 @@ public class PlayerController2D : MonoBehaviour
         canDoubleJump = false;
         ActualizarColorPersonaje();
     }
-
     void Update()
     {
+        if (groundedCooldown > 0)
+        {
+            groundedCooldown -= Time.deltaTime;
+            isGrounded = false;
+            return;
+        }
+
         CheckGround();
+
+        // Jump Buffer: Registra la intención de saltar incluso antes de tocar suelo
+        if (jumpPressed)
+        {
+            jumpBufferCounter = jumpBufferTime;
+            jumpPressed = false; // Limpiamos el input
+        }
+        else
+        {
+            jumpBufferCounter -= Time.deltaTime;
+        }
+
         HandleAnimations();
         FlipSprite();
     }
@@ -91,6 +112,12 @@ public class PlayerController2D : MonoBehaviour
 
     void CheckGround()
     {
+        if (groundedCooldown > 0)
+        {
+            groundedCooldown -= Time.deltaTime;
+            isGrounded = false;
+            return;
+        }
         // OverlapCircle para área general
         bool overlap = Physics2D.OverlapCircle(groundCheck.position, groundRadius, groundLayer);
 
@@ -187,25 +214,26 @@ public class PlayerController2D : MonoBehaviour
         HandleJump();
     }
 
-    void HandleJump()
+    void HandleJump() // Llamar en Update o LateUpdate
     {
-        if (jumpPressed)
+        if (jumpBufferCounter > 0)
         {
-            // Salto normal o coyote time
             if (coyoteTimeCounter > 0f)
             {
                 rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
                 coyoteTimeCounter = 0f;
+                jumpBufferCounter = 0f;
                 canDoubleJump = habilidades.ContainsKey(PlayerAbilityType.DoubleJump);
+                groundedCooldown = 0.15f; // Activa el cooldown solo al saltar
             }
-            // Doble salto si tiene la habilidad y no está en el suelo
             else if (canDoubleJump && habilidades.ContainsKey(PlayerAbilityType.DoubleJump))
             {
                 rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
                 canDoubleJump = false;
                 GastarHabilidad(PlayerAbilityType.DoubleJump);
+                jumpBufferCounter = 0f;
+                groundedCooldown = 0.15f; // También para doble salto si quieres evitar dobles saltos rápidos
             }
-            jumpPressed = false;
         }
     }
 
