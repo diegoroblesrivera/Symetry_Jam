@@ -25,8 +25,8 @@ public class MiddleLine : MonoBehaviour
 
         if (player != null)
         {
-            player.SpawnVisualBurst();
-            player.BloquearColocacionBloques();
+            //player.SpawnVisualBurst();
+            //player.BloquearColocacionBloques();
         }
         else
         {

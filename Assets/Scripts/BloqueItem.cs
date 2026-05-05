@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class BloqueItem : MonoBehaviour
 {
+    public PlayerAbilityType habilidadOtorgada; // Selecciona la habilidad en el Inspector
     public int cantidadExtra = 1;
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -9,7 +10,10 @@ public class BloqueItem : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             var player = collision.GetComponent<PlayerController2D>();
-            player.AumentarLimiteBloques(cantidadExtra);
+            if (player != null)
+            {
+                player.OtorgarHabilidad(habilidadOtorgada, cantidadExtra);
+            }
             Destroy(gameObject);
         }
     }
