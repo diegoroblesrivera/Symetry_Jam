@@ -15,18 +15,18 @@ public enum PlayerAbilityType
 public class AbilityPalette
 {
     public PlayerAbilityType ability;
-    public Color color0 = Color.white;   // Más claro
-    public Color color1 = Color.gray;    // Gris claro
-    public Color color2 = Color.gray;    // Gris oscuro
-    public Color color3 = Color.black;   // Más oscuro
+    public Color color0 = Color.white;   // Ojos
+    public Color color1 = Color.gray;    // Luz
+    public Color color2 = Color.gray;    // Sombra
+    public Color color3 = Color.black;   // Cuerpo
 }
 
 [RequireComponent(typeof(Rigidbody2D), typeof(SpriteRenderer), typeof(Animator))]
 public class PlayerController2D : MonoBehaviour
 {
     [Header("Movimiento")]
-    public float speed = 7f;
-    public float jumpForce = 12f;
+    public float speed = 10f;
+    public float jumpForce = 24f;
     public float coyoteTime = 0.15f;
     public float fastFallMultiplier = 2f;
     public float jumpBufferTime = 0.1f;
@@ -37,8 +37,8 @@ public class PlayerController2D : MonoBehaviour
     public Transform groundCheck;
     public float groundRadius = 0.25f;
     public LayerMask groundLayer;
-    public int groundRayCount = 3;
-    public float groundRayLength = 0.1f;
+    public int groundRayCount = 5;
+    public float groundRayLength = 0.05f;
 
     [Header("Paletas de habilidades")]
     public List<AbilityPalette> abilityPalettes;
@@ -76,6 +76,7 @@ public class PlayerController2D : MonoBehaviour
         canDoubleJump = false;
         ActualizarColorPersonaje();
     }
+
     void Update()
     {
         if (groundedCooldown > 0)
@@ -107,6 +108,12 @@ public class PlayerController2D : MonoBehaviour
         Move();
         BetterFall();
     }
+
+    void LateUpdate()
+    {
+        HandleJump();
+    }
+
 
     #region Movimiento y Suelo
 
@@ -166,6 +173,29 @@ public class PlayerController2D : MonoBehaviour
         }
     }
 
+    void HandleJump() // Llamar en Update o LateUpdate
+    {
+        if (jumpBufferCounter > 0)
+        {
+            if (coyoteTimeCounter > 0f)
+            {
+                rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
+                coyoteTimeCounter = 0f;
+                jumpBufferCounter = 0f;
+                canDoubleJump = habilidades.ContainsKey(PlayerAbilityType.DoubleJump);
+                groundedCooldown = 0.15f; // Activa el cooldown solo al saltar
+            }
+            else if (canDoubleJump && habilidades.ContainsKey(PlayerAbilityType.DoubleJump))
+            {
+                rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
+                canDoubleJump = false;
+                GastarHabilidad(PlayerAbilityType.DoubleJump);
+                jumpBufferCounter = 0f;
+                groundedCooldown = 0.15f; // También para doble salto si quieres evitar dobles saltos rápidos
+            }
+        }
+    }
+
     #endregion
 
     #region Input
@@ -208,34 +238,6 @@ public class PlayerController2D : MonoBehaviour
     }
 
     #endregion
-
-    void LateUpdate()
-    {
-        HandleJump();
-    }
-
-    void HandleJump() // Llamar en Update o LateUpdate
-    {
-        if (jumpBufferCounter > 0)
-        {
-            if (coyoteTimeCounter > 0f)
-            {
-                rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
-                coyoteTimeCounter = 0f;
-                jumpBufferCounter = 0f;
-                canDoubleJump = habilidades.ContainsKey(PlayerAbilityType.DoubleJump);
-                groundedCooldown = 0.15f; // Activa el cooldown solo al saltar
-            }
-            else if (canDoubleJump && habilidades.ContainsKey(PlayerAbilityType.DoubleJump))
-            {
-                rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
-                canDoubleJump = false;
-                GastarHabilidad(PlayerAbilityType.DoubleJump);
-                jumpBufferCounter = 0f;
-                groundedCooldown = 0.15f; // También para doble salto si quieres evitar dobles saltos rápidos
-            }
-        }
-    }
 
     #region Habilidades
 
